@@ -1,2 +1,2 @@
 # USACO
-My usage problems for use on GitHub code spaces
+My usaco problems for use on GitHub code spaces
