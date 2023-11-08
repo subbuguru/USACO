@@ -1,11 +1,36 @@
 import java.io.*;
 import java.util.*;
 
-public class template {
-	public static void main(String[] args) {
-		Kattio io = new Kattio();
-		
-		io.println();
+public class lifeguards {
+	public static void main(String[] args) throws IOException {
+		Kattio io = new Kattio("lifeguards");
+
+        int n = io.nextInt();
+        int[][] guards = new int[n][2];
+        int maxtime = 0;
+
+        for ( int i = 0; i < n; i++) {
+            guards[i][0] = io.nextInt();
+            guards[i][1] = io.nextInt();
+        }
+
+        for ( int i = 0; i < n; i++) { // the illegal number
+            int[] time = new int[1001]; //time array for thisset
+			int timevalue = 0;
+            for (int j = 0; j <n; j++) { // go through all to add tiem
+                if (j != i) { // don t add if illegal num
+					for (int k = guards[j][0]; k < guards[j][1]; k++) {
+						time[k] = 1; // set to 1 if it is a time (if it repeat it will just set 1 again)
+					}
+                }
+            }
+			for (int t : time) {
+				timevalue += t;
+			}
+			maxtime = Math.max(maxtime, timevalue);
+
+        }
+		io.println(maxtime);
 		io.close();
 	}
 

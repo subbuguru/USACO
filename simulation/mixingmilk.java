@@ -1,10 +1,39 @@
+package simulation;
 import java.io.*;
 import java.util.*;
 
-public class template {
+public class Main {
 	public static void main(String[] args) {
 		Kattio io = new Kattio();
 		
+        int[] capacity = new int[3];
+        int[] milk = new int[3];
+
+        for (int i = 0; i < 3; i++) {
+            capacity[i] = io.nextInt();
+            milk[i] = io.nextInt();
+        }
+        for (int i = 0; i <100; i++) {
+           // int c1 = capacity[i%3];
+            int m1 = milk[i%3];
+            int c2 = capacity[(i+1)%3];
+            int m2 = milk[(i+1)%3];
+
+            if (m1 + m2 <= c2) {
+                m2 = m1+m2;
+                m1 = 0;
+            } else {
+                m1 = (m1 + m2) - c2;
+                m2 = c2;
+                
+            }
+            milk[i%3] = m1;
+            milk[(i+1)%3] = m2;
+        }
+
+        for (int i : milk) {
+            io.println(i);
+        }
 		io.println();
 		io.close();
 	}

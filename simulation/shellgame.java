@@ -1,10 +1,45 @@
+package simulation;
 import java.io.*;
 import java.util.*;
 
-public class template {
+//tips: make a boolean array, swap between based on ur swap 2d array
+// use guess of same index to check and see if we should add a point
+
+public class Main {
 	public static void main(String[] args) {
 		Kattio io = new Kattio();
 		
+        int g = io.nextInt();
+
+        int[][] swaps = new int[g][2];
+        int[] guesses = new int[g];
+        int maxpoints = 0;
+
+        for (int i = 0; i < g; i++) {
+            swaps[i][0] = io.nextInt();
+            swaps[i][1] = io.nextInt();
+            guesses[i] = io.nextInt();
+        }
+
+        for (int i = 1; i <= 3; i++) {
+            
+			boolean[] shells = new boolean[4];
+			shells[i] = true;
+			int points = 0;
+
+            for (int j = 0; j < g; j++) {
+				boolean temp = shells[swaps[j][0]];
+				shells[swaps[j][0]] = shells[swaps[j][1]];
+				shells[swaps[j][1]] = temp;
+
+				if (shells[guesses[j]]) {
+					points ++;
+				}
+            }
+			maxpoints = Math.max(points, maxpoints);
+        }
+
+		io.println(maxpoints);
 		io.println();
 		io.close();
 	}

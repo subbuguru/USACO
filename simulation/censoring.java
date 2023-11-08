@@ -1,10 +1,28 @@
+package simulation;
 import java.io.*;
 import java.util.*;
 
-public class template {
+public class Main {
 	public static void main(String[] args) {
 		Kattio io = new Kattio();
 		
+        String s = io.next();
+		String t = io.next();
+
+		StringBuilder build = new StringBuilder();
+
+		for (int i = 0; i < s.length(); i++) {
+			build.append(s.substring(i, i+1));
+			if (build.length() >= t.length() && 
+			build.substring(build.length()-t.length()).contentEquals(t)) {
+				build.delete(build.length()-t.length(), build.length());
+			}
+
+		}
+		
+
+       io.println(build.toString());
+
 		io.println();
 		io.close();
 	}

@@ -1,11 +1,28 @@
+package simulation;
 import java.io.*;
 import java.util.*;
 
-public class template {
+public class countingliars {
 	public static void main(String[] args) {
 		Kattio io = new Kattio();
 		
-		io.println();
+		int num = io.nextInt();
+		int[] range = {1, 10^9};
+
+		for (int i = 0; i < num; i ++) {
+			boolean greater;
+			if (io.next().equals("L")) {
+				greater = false;
+			} else {
+				greater = true;
+			}
+			int start = io.nextInt();
+			if (greater) {
+				range[0] = start;
+			}
+
+		}
+
 		io.close();
 	}
 

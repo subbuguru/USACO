@@ -1,11 +1,27 @@
+
 import java.io.*;
 import java.util.*;
-
-public class template {
-	public static void main(String[] args) {
-		Kattio io = new Kattio();
+//mods
+public class cbarn {
+	public static void main(String[] args) throws IOException {
+		Kattio io = new Kattio("cbarn");
 		
-		io.println();
+        int n = io.nextInt();
+        int[] capacity = new int[n];
+        int mindist = 999999999;
+        for (int i = 0; i < n; i++) {
+            capacity[i] = io.nextInt();
+        }
+
+        for (int i = 0; i < n; i++){
+            int dist = 0;
+            for (int j = 0; j < n; j++) {
+                    int distroom = j * capacity[(i+j)%n];
+                    dist += distroom;
+            }
+            mindist = Math.min(dist, mindist);
+        }
+        io.println (mindist);
 		io.close();
 	}
 

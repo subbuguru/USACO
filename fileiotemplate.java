@@ -4,15 +4,7 @@ import java.util.*;
 public class fileiotemplate {
 	public static void main(String[] args) throws IOException {
 		Kattio io = new Kattio("problemname");
-		int a = io.nextInt();
-		int b = io.nextInt();
-		int c = io.nextInt();
-		io.print("The sum of these three numbers is ");
-		io.println(a + b + c);
-		/*
-		 * Make sure to include the line below, as it
-		 * flushes and closes the output stream.
-		 */
+		
 		io.close();
 	}
 
