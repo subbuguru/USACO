@@ -1,52 +1,41 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class Main {
-	public static void main(String[] args) {
-		Kattio io = new Kattio();
+public class cowcrossIII {
+	public static void main(String[] args) throws IOException {
+		Kattio io = new Kattio("cowqueue");
 		
-        int k = io.nextInt();
         int n = io.nextInt();
-        int[][] sessions = new int[k][n];
-		int count = 0;
-		int[][] pairs = new int[n][n];
+        int[][] cows = new int[n][2];
 
-		for (int i = 0; i <k; i++) {
-			for (int j = 0; j < n; j++) {
-				sessions[i][j] = io.nextInt();
-			}
-		}
+        int starttime = 0;
+        int endtime = 0;
 
-		// go through each pair in 1,4
-		// see if, in each session, one pair is always better than other
-		//if so, increment 1
+        // read input 
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 2; j++) {
+                cows[i][j] = io.nextInt();
+            }
+        }
 
-		for (int i = 1; i < n; i++) {
-			for (int j = i + 1; j <=n; j++) {
-				//if one cow is always better than other, increment
-				int temp = 0;
-				for (int m = 0; m < k; m++) {
-					List<Integer> list = Arrays.stream(sessions[m]).boxed().collect(Collectors.toList());
-				if (list.indexOf(i) < list.indexOf(j)) {
-				    temp++;
-				}
-				}
-				
-				if (temp ==0 || temp==k) {
-					count++;
-				}
-				
-			}
-		}
+        //sort the arrays with custom comparator
+        Arrays.sort(cows, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return Integer.compare(a[0], b[0]);
+            }
+        });
 
-		
+        //iterate through each cow, simulating each
+        for (int[] cow : cows) {
+            starttime = Math.max(cow[0], endtime); // start time for a cow is the max of its earliest time and current tally
+            endtime = starttime + cow[1]; // add the cow's time to current tally
+        }
 
-        
-		io.println(count);
+        io.println(endtime);
 
 
-		io.println();
+
 		io.close();
 	}
 
