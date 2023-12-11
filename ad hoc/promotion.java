@@ -1,44 +1,31 @@
 import java.io.*;
 import java.util.*;
 
-public class angrycows {
-
-	final static Set<Integer> exploded = new HashSet<Integer>();
-	static List<Integer> bales = new ArrayList<Integer>();
+public class promotion {
 	public static void main(String[] args) throws IOException {
+		Kattio io = new Kattio("promote");
+		int[] before = new int[4];
+        int[] after = new int[4];
 
-		
-		Kattio io = new Kattio("angry");
-
-		int maxsize = 0;
-
-        int z = io.nextInt();
-        
-		
-        for (int i = 0; i < z; i++) {
-            bales.add(io.nextInt());
+        for (int i = 0; i < 4; i++) {
+            before[i] = io.nextInt();
+            after[i] = io.nextInt();
         }
 
-        Collections.sort(bales);
-        
-		for (int i = 0; i < z; i ++) {
-			explode(i, 1);
-			maxsize = Math.max(maxsize, explode(i, 1)  + explode(i, -1) + 1);
-			exploded.clear();
+        int platpromotions = after[3] - before[3];
 
-		}
+        int goldtemp = before[2] - platpromotions;
+        int goldpromotions = after[2] - goldtemp;
 
-		
+        int silvertemp = before[1] - goldpromotions;
+        int silverpromotions = after[1] - silvertemp;
+
+        io.println(silverpromotions);
+        io.println(goldpromotions);
+        io.println(platpromotions);
+
 		io.close();
-
-		
 	}
-
-	//method to explode a bale
-	public static int explode (int start, int direction) {
-		
-	}
-	
 
 	//BeginCodeSnip{Kattio}
 	static class Kattio extends PrintWriter {
